@@ -7,15 +7,14 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { DEFAULT_PROF_PIC } from "../utils/constants";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
 
   const fullName = useRef(null);
   const email = useRef(null);
@@ -46,25 +45,25 @@ const Login = () => {
 
           updateProfile(auth.currentUser, {
             displayName: fullName.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/82205194",
+            photoURL: DEFAULT_PROF_PIC,
           })
             .then(() => {
-              const {uid, email, displayName, photoURL} = auth.currentUser;
-              dispatch(addUser({
-                uid,
-                email,
-                displayName,
-                photoURL
-              }));
-              navigate("/browse");
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid,
+                  email,
+                  displayName,
+                  photoURL,
+                })
+              );
             })
             .catch((error) => {
               setErrorMessage(error.message);
             });
 
-          const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
+          // const user = userCredential.user;
+          // console.log(user);
           // ...
         })
         .catch((error) => {
@@ -83,7 +82,6 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
