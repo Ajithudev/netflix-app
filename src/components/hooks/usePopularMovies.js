@@ -12,7 +12,7 @@ const usePopularMovies = () => {
       TMDB_API_OPTIONS
     );
     const json = await data.json();
-    console.log("Popular", json.results);
+    // console.log("Popular", json.results);
     dispatch(addPopularMovies(json.results));
   };
   useEffect(() => {

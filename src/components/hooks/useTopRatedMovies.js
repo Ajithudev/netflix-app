@@ -12,7 +12,7 @@ const useTopRatedMovies = () => {
             TMDB_API_OPTIONS
         );
         const json = await data.json();
-        console.log("Top Rated Movies ",json);
+        // console.log("Top Rated Movies ",json);
         dispath(addTopRatedMovies(json.results));
     }
 

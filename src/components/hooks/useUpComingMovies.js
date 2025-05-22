@@ -12,7 +12,7 @@ const useUpComingMovies = () => {
       TMDB_API_OPTIONS
     );
     const json = await data.json();
-    console.log("UpComing Movies", json.results);
+    // console.log("UpComing Movies", json.results);
     dispatch(addUpComingMovies(json.results));
   };
 

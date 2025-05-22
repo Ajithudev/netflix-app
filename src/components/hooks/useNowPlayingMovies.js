@@ -14,7 +14,7 @@ const useNowPlayingMovies = () => {
       TMDB_API_OPTIONS
     );
     const json = await data.json();
-    console.log('Nowing',json.results);
+    // console.log('Nowing',json.results);
     dispatch(addNowPlayingMovies(json.results));
   };
 
